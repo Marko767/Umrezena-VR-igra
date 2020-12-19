@@ -4,8 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Out
   - Paddle
+  - BluePaddle
+  - OrangePaddle
+  - Player1ServeArea
+  - Player2ServeArea
+  - Player1TableArea
+  - Player2TableArea
+  - Player1Table
+  - Player2Table
+  - Walls
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -18,7 +27,7 @@ TagManager:
   - Grab
   - Ground
   - Body
-  - 
+  - Canvas_UI
   - 
   - 
   - 

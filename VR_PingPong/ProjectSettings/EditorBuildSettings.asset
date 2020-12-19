@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PinoPong_VR.unity
+    path: Assets/Scenes/GUI.unity
+    guid: 98700602e9d85e44bb9c1c557334fed6
+  - enabled: 1
+    path: Assets/Scenes/PingPong_VR.unity
     guid: 5eea0917631f9e24ebb779bc61058b53
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8c5142f18832f5344b308e5cc90f8be3, type: 2}
