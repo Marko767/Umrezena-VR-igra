@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class Ball : MonoBehaviour
 {
-    bool playing = true; 
+    bool playing = true;
+
+    private float time;
 
     //game bodovi za svakog igraca
     int player1_gameScore;
@@ -19,13 +21,13 @@ public class Ball : MonoBehaviour
     int lastPlayerHit;
 
     //dio stola u koji je loptica zadnje lupila (true za player1Table, false za player2Table)
-    bool lastTableHit;
+    int lastTableHit;
 
     bool gameInProgress;
     public bool matchInProgress;
 
     //true za player1, false za player2
-    bool isServing;
+    int isServing;
 
     //servis
     bool firstHit;
@@ -45,6 +47,8 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //time = 0.0f;
+
         player1_gameScore = 0;
         player2_gameScore = 0;
         player1_setScore = 0;
@@ -57,11 +61,16 @@ public class Ball : MonoBehaviour
 
         gameInProgress = false;
         matchInProgress = true;
-        isServing = true;
+        isServing = 1;
 
         hitSound = GetComponent<AudioSource>();
 
         updateScores_GUI();
+    }
+
+    private void Update()
+    {
+       // time = Time.captureDeltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -101,88 +110,93 @@ public class Ball : MonoBehaviour
                     //provjeri je li loptica pala na pravo mjesto prilikom servisa
                     if(gameInProgress == false) checkServe(collision);
 
-                    //ako je prvi igrac servirao
-                    if (isServing == true)
+                   /* if (time > 0.3f)
                     {
-                        //loptica je dvaput pala na pravo mjesto ------ servis je dobar i pocinje igra
-                        if (firstHit == true && secondHit == true)
-                        {
-                            bool endG;
-                            //gameInProgress = true;
-                            pointTo(1);
-                            //provjeri je li game gotov, ako je zavrsi game
-                            //endG = checkGameEnd(collision);
-                            //if (endG)
-                            //{
-                            playing = false;
-                            endGame();
-                            //}
+
+                        time = 0.0f;*/
+
+                        //ako je prvi igrac servirao
+
+                            //loptica je dvaput pala na pravo mjesto ------ servis je dobar i pocinje igra
+                            if (firstHit == true && secondHit == true)
+                            {
+                                bool endG;
+                                //gameInProgress = true;
+                                pointTo(1);
+                                //provjeri je li game gotov, ako je zavrsi game
+                                //endG = checkGameEnd(collision);
+                                //if (endG)
+                                //{
+                                playing = false;
+                                endGame();
+                                //}
+                            }
+
+                            //prvi udarac je dobar, drugi je otisao u aut ------ servis nije dobar
+                            else if (firstHit == true && secondHit == false && !collision.transform.CompareTag("Player1Table"))
+                            {
+                                pointTo(2);
+                                playing = false;
+                                //endGame();
+                            }
+
+                            //prvi udarac je dobar, drugi je otisao u mrezu ili je dvaput lupila na njegovu polovicu ------ servis nije dobar
+                            else if (firstHit == true && secondHit == false && collision.transform.CompareTag("Player1Table") && lastTableHit == 1)
+                            {
+                                pointTo(2);
+                                playing = false;
+                                //endGame();
+                            }
+
+                            //prvi udarac nije dobar ------ servis nije dobar
+                            else if (firstHit == false && secondHit == false)
+                            {
+                                pointTo(2);
+                                playing = false;
+                                //endGame();
+                            }
                         }
 
-                        //prvi udarac je dobar, drugi je otisao u aut ------ servis nije dobar
-                        else if (firstHit == true && secondHit == false && !collision.transform.CompareTag("Player1Table"))
+                        //isto za drugog
+                       /* else if (isServing == false)
                         {
-                            pointTo(2);
-                            playing = false;
-                            endGame();
-                        }
+                            if (firstHit == true && secondHit == true)
+                            {
+                                bool endG;
+                                //gameInProgress = true;
+                                pointTo(2);
+                                //endG = checkGameEnd(collision);
+                                //if (endG)
+                                //{
+                                playing = false;
+                                endGame();
+                                //}
+                            }
 
-                        //prvi udarac je dobar, drugi je otisao u mrezu ili je dvaput lupila na njegovu polovicu ------ servis nije dobar
-                        else if (firstHit == true && secondHit == false && collision.transform.CompareTag("Player1Table") && lastTableHit == true)
-                        {
-                            pointTo(2);
-                            playing = false;
-                            endGame();
-                        }
+                            else if (firstHit == true && secondHit == false && !collision.transform.CompareTag("Player2Table"))
+                            {
+                                pointTo(1);
+                                playing = false;
+                                endGame();
+                            }
 
-                        //prvi udarac nije dobar ------ servis nije dobar
-                        else if (firstHit == false && secondHit == false)
-                        {
-                            pointTo(2);
-                            playing = false;
-                            endGame();
-                        }
-                    }
+                            else if (firstHit == true && secondHit == false && collision.transform.CompareTag("Player2Table") && lastTableHit == false)
+                            {
+                                pointTo(1);
+                                playing = false;
+                                endGame();
+                            }
 
-                    //isto za drugog
-                    else if (isServing == false)
-                    {
-                        if (firstHit == true && secondHit == true)
-                        {
-                            bool endG;
-                            //gameInProgress = true;
-                            pointTo(2);
-                            //endG = checkGameEnd(collision);
-                            //if (endG)
-                            //{
-                            playing = false;
-                            endGame();
-                            //}
+                            else if (firstHit == false && secondHit == false)
+                            {
+                                pointTo(1);
+                                playing = false;
+                                endGame();
+                            }
                         }
+                   //}*/
 
-                        else if (firstHit == true && secondHit == false && !collision.transform.CompareTag("Player2Table"))
-                        {
-                            pointTo(1);
-                            playing = false;
-                            endGame();
-                        }
-
-                        else if (firstHit == true && secondHit == false && collision.transform.CompareTag("Player2Table") && lastTableHit == false)
-                        {
-                            pointTo(1);
-                            playing = false;
-                            endGame();
-                        }
-
-                        else if (firstHit == false && secondHit == false)
-                        {
-                            pointTo(1);
-                            playing = false;
-                            endGame();
-                        }
-                    }
-
-                }
+                //}
 
                 //provjeri treba li zamijeniti igraca koji servira
                 switchServePlayer();
@@ -217,13 +231,13 @@ public class Ball : MonoBehaviour
     void checkServe(Collision other)
     {
         //ako prvi igrac servira
-        if (isServing == true)
-        {
+       // if (isServing == true)
+      //  {
             //prvi udarac u stol, mora biti u njegov dio stola
             if (!firstHit && other.transform.CompareTag("Player1Table"))
             {
                 firstHit = true;
-                lastTableHit = true;
+                lastTableHit = 1;
             }
 
             //drugi udarac u stol, mora biti u protivnikov dio stola (i prethodno je morala lupiti u njegov dio)
@@ -231,10 +245,10 @@ public class Ball : MonoBehaviour
             if (firstHit && other.transform.CompareTag("Player2Table"))
             {
                 secondHit = true;
-                lastTableHit = false;
+                lastTableHit = 2;
             }
-        }
-
+        //}
+        /*
         //isto za drugog igraca
         else if (isServing == false)
         {
@@ -249,7 +263,7 @@ public class Ball : MonoBehaviour
             }
         }
 
-        updateScores_GUI();
+        updateScores_GUI();*/
     }
     public void updateScores_GUI()
     {
@@ -291,13 +305,13 @@ public class Ball : MonoBehaviour
         if (other.transform.CompareTag("Player1Table"))
         {
             //loptica je lupila dvaput ili u mrezicu pa opet u njegov dio stola
-            if(lastTableHit == true)
+            if(lastTableHit == 1)
             {
                 pointTo(2);
                 end = true;
             }
 
-            lastTableHit = true;
+            lastTableHit = 1;
 
             //igrac gubi ako ju je udario i ako je loptica lupila u njegov dio stola
             if (lastPlayerHit == 1)
@@ -308,13 +322,13 @@ public class Ball : MonoBehaviour
         }
         else if (other.transform.CompareTag("Player2Table"))
         {
-            if (lastTableHit == false)
+            if (lastTableHit == 2)
             {
                 pointTo(1);
                 end = true;
             }
 
-            lastTableHit = false;
+            lastTableHit = 2;
 
             if (lastPlayerHit == 2)
             {
@@ -391,13 +405,13 @@ public class Ball : MonoBehaviour
         {
             if(((player1_gameScore + player2_gameScore) % 2) == 0)
             {
-                if(isServing == true)
+                if(isServing == 1)
                 {
-                    isServing = false;
+                    isServing = 2;
                 }
                 else
                 {
-                    isServing = true;
+                    isServing = 1;
                 }
             }
         }
@@ -405,13 +419,13 @@ public class Ball : MonoBehaviour
         //inace nakon svakog servisa
         else if (player1_gameScore >= 10 && player2_gameScore >= 10)
         {
-            if (isServing == true)
+            if (isServing == 1)
             {
-                isServing = false;
+                isServing = 2;
             }
             else
             {
-                isServing = true;
+                isServing = 1;
             }
         }
     }
@@ -439,11 +453,11 @@ public class Ball : MonoBehaviour
         firstHit = false;
         secondHit = false;
 
-        if (isServing)
+        if (isServing == 1)
         {
-            isServing = false;
+            isServing = 2;
         }
-        else isServing = true;
+        else isServing = 1;
     }
 
     void declareWinner(int player)
@@ -466,7 +480,7 @@ public class Ball : MonoBehaviour
 
         gameInProgress = false;
         matchInProgress = false;
-        isServing = true;
+        isServing = 1;
     }
 
     public void startMatch()

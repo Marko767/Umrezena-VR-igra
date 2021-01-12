@@ -8,6 +8,8 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
     private GameObject spawnedPlayerPrefab;
 
+    private Transform position2;
+
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();

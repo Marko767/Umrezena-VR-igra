@@ -1,0 +1,71 @@
+newmtl MetalBarsExt
+Kd 0.5471698 0.5471698 0.5471698
+d 1
+
+newmtl DefaultHDMaterial
+Kd 0.7279412 0.7279412 0.7279412
+d 1
+
+newmtl GlassSliderDoor
+Kd 1 1 1
+d 0.09803922
+
+newmtl BrickWall
+Kd 1 1 1
+d 1
+
+newmtl Wood
+map_Kd -o 0 0 -s 1 1 Wood_07_1K_Base_Color.png
+Kd 1 1 1
+d 1
+
+newmtl Polished_Marble
+map_Kd -o 0 0 -s 1 1 Polished_concrete_01_1K_Base_Color.png
+Kd 1 1 1
+d 1
+
+newmtl Titanium
+map_Kd -o 0 0 -s 1 1 Titanium-Scuffed_basecolor.png
+Kd 1 1 1
+d 1
+
+newmtl Titanium_1
+map_Kd -o 0 0 -s 1 1 Brushed_iron_02_1K_Base_Color.png
+Kd 1 1 1
+d 1
+
+newmtl WoodDoor
+map_Kd -o 0 0 -s 1 1 bamboo-wood-semigloss-albedo.png
+Kd 1 1 1
+d 1
+
+newmtl Wood_
+map_Kd -o 0 0 -s 1 1 Wood_07_1K_Base_Color.png
+Kd 1 1 1
+d 1
+
+newmtl CementWall
+map_Kd -o 0 0 -s 1 1 patchy_cement1_Base_Color.png
+Kd 1 1 1
+d 1
+
+newmtl WhiteMarble
+map_Kd -o 0 0 -s 1 1 Marble05_col.jpg
+Kd 1 1 1
+d 1
+
+newmtl BathRoomTiles
+map_Kd -o 0 0 -s 1 1 Tiles30_col.jpg
+Kd 1 1 1
+d 1
+
+newmtl WhiteStucco
+map_Kd -o 0 0 -s 1 1 White_stucco_wall_03_1K_Base_Color.png
+Kd 1 1 1
+d 1
+
+newmtl BlurryGlass
+map_Kd -o 0 0 -s 1 1 Frosted Glass.jpg
+Kd 0.8301887 0.8301887 0.8301887
+d 1
+
