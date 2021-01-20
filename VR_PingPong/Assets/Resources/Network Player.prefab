@@ -108,7 +108,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e694aa74eb2e4ad18f7f81f9d902bb2, type: 3}
+  - {fileID: 2100000, guid: 161e09ca89ed87e4ba61de03f577192c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 3091263941785587030}
   - component: {fileID: 2136313691088418000}
   - component: {fileID: 2093696951880806301}
+  - component: {fileID: -8366816744077585723}
   m_Layer: 0
   m_Name: Network Player
   m_TagString: Untagged
@@ -244,7 +245,10 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 8243913984511973558}
+  - {fileID: 5506966957508470384}
+  - {fileID: 8999207009695653786}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -263,6 +267,18 @@ MonoBehaviour:
   head: {fileID: 7311209008252570472}
   leftHand: {fileID: 1111586725788485132}
   rightHand: {fileID: 8974040388111972810}
+--- !u!114 &-8366816744077585723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755376874214614520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e66c02d2a07c1f4795f4ad52f665b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9161060147691901388
 GameObject:
   m_ObjectHideFlags: 0
